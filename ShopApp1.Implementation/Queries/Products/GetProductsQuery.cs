@@ -27,24 +27,14 @@ namespace ShopApp1.Implementation.Queries.Products
 
         public PagedResponse<ProductSearchDto> Execute(ProductsPagedSearch search)
         {
-            var query = _context.Products.Include(x=>x.ProductMaterials).Where(x=>x.IsActive).AsQueryable();
+            var query = _context.Products.AsQueryable();
             var query2 = _context.ProductMaterials;
-            var query3 = _context.Products.Include(x => x.ProductMaterials).Include(x=>x.Category).AsQueryable();
+            Console.WriteLine(query.Count());
 
-            //// -----------------------------
-
-            if (!string.IsNullOrEmpty(search.Id.ToString()) || !string.IsNullOrWhiteSpace(search.Id.ToString()))
+            if (!string.IsNullOrEmpty(search.Id) || !string.IsNullOrWhiteSpace(search.Id))
             {
-                query = query.Where(x => x.Id.Equals(search.Id));
+                query = query.Where(x => x.Id.ToString().Equals(search.Id));
             }
-            //if (!string.IsNullOrEmpty(search.CId.ToString()) || !string.IsNullOrWhiteSpace(search.CId.ToString()))
-            //{
-            //    query = query.Where(x => x.CategoryId.Equals(search.CId));
-            //}
-            //if (!string.IsNullOrEmpty(search.CategoryName) || !string.IsNullOrWhiteSpace(search.CategoryName))
-            //{
-            //    query = query.Where(x => x.Category.Name.Contains(search.CategoryName));
-            //}
             if (!string.IsNullOrEmpty(search.Name) || !string.IsNullOrWhiteSpace(search.Name))
             {
                 query = query.Where(x => x.Name.Contains(search.Name));
@@ -53,9 +43,8 @@ namespace ShopApp1.Implementation.Queries.Products
             {
                 query = query.Where(x => x.Description.Contains(search.Description));
             }
-            //// -------------------------------
-           
             var skipItems = (search.Page.Value - 1) * search.PerPage.Value;
+
             var response = new PagedResponse<ProductSearchDto>();
             response.TotalCount = query.Count();
             response.Items = query.Skip(skipItems).Take(search.PerPage.Value).Select(x => new ProductSearchDto
@@ -63,12 +52,11 @@ namespace ShopApp1.Implementation.Queries.Products
                 Id = x.Id,
                 Name = x.Name,
                 Description = x.Description,
-                //Price = x.Price,
+                Price = (int)x.Price,
                 CategoryId = x.CategoryId,
                 Category = _context.Categories.Where(y => y.Id == x.CategoryId).Select(y => y.Name).FirstOrDefault().ToString(),
                 Materials = query2.Where(y => y.ProductId == x.Id).Select(y => y.Material).Select(y => new MaterialDto { Id = y.Id, Name = y.Name }).ToList()
             }).ToList();
-
             response.CurrentPage = search.Page.Value;
             response.ItemsPerPage = search.PerPage.Value;
 

@@ -29,10 +29,8 @@ namespace ShopApp1.Application.Searches
 
     public class ProductsPagedSearch : PagedSearch
     {
-        public int Id { get; set; }
-        //public int CId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        //public string CategoryName { get; set; }
         public string Description { get; set; }
     }
     public class OrdersPagedSearch : PagedSearch

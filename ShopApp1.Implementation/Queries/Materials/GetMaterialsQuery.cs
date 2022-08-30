@@ -30,6 +30,7 @@ namespace ShopApp1.Implementation.Queries.Materials
             {
                 query = query.Where(x => x.Name.Contains(search.Name));
             }
+
             var skipItems = (search.Page.Value - 1) * search.PerPage.Value;
 
             var response = new PagedResponse<MaterialDto>();

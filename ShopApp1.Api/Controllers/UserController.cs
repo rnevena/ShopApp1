@@ -49,8 +49,11 @@ namespace ShopApp1.Api.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UserDto dto, [FromServices] IUpdateUserCommand command)
         {
+            dto.Id = id;
+            executor.ExecuteCommand(command, dto);
+            return StatusCode(204);
         }
 
         // DELETE api/<UserController>/5

@@ -108,6 +108,7 @@ namespace ShopApp1.Api
             services.AddTransient<IRegisterUserCommand, RegisterUserCommand>();
             services.AddTransient<ICreateUserCommand, CreateUserCommand>();
             services.AddTransient<IDeleteUserCommand, DeleteUserCommand>();
+            services.AddTransient<IUpdateUserCommand, UpdateUserCommand>();
             services.AddTransient<RegisterValidator>();
 
             // autorizacija
