@@ -84,7 +84,7 @@ namespace ShopApp1.Api.Controllers
                     Name = "Satin wrapover dress",
                     Description = "Short dress in satin with a slight sheen. Pointed collar and a wrapover front with wide ties at one side and concealed ties at other side. ",
                     Price = 15,
-                    Category = subcategories.ElementAt(10)
+                    Category = subcategories.ElementAt(7)
                 },
                 new Product
                 {
@@ -98,28 +98,28 @@ namespace ShopApp1.Api.Controllers
                     Name = "Slim cargo shorts",
                     Description = "Adjustable toggle waist. Large pockets. Slim fit.",
                     Price = 11,
-                    Category = subcategories.ElementAt(12)
+                    Category = subcategories.ElementAt(9)
                 },
                 new Product
                 {
                     Name = "Short Leather Skirt",
                     Description = "Short skirt in cotton-blend leather. High waist with concealed waistband. Unlined.",
                     Price = 12,
-                    Category = subcategories.ElementAt(11)
+                    Category = subcategories.ElementAt(8)
                 },
                 new Product
                 {
                     Name = "Regular Fit Cotton Shirt",
                     Description = "Short-sleeved shirt in woven cotton fabric with a turn-down collar. Regular Fit – classic fit with good room for movement and gently shaped waist for a comfortable, tailored silhouette.",
                     Price = 8,
-                    Category = subcategories.ElementAt(5)
+                    Category = subcategories.ElementAt(2)
                 },
                 new Product
                 {
                     Name = "90s Baggy Low Jeans",
                     Description = "Loose-fit, 90s-inspired 5-pocket jeans in thick cotton denim. Low waist, zip fly with button, and straight legs.",
                     Price = 25,
-                    Category = subcategories.ElementAt(9)
+                    Category = subcategories.ElementAt(6)
                 }
 
             };
@@ -162,8 +162,16 @@ namespace ShopApp1.Api.Controllers
                 }
 
             };
-            var userUseCases = Enumerable.Range(2, 9).ToList();
-            var adminUseCases = Enumerable.Range(10, 25).ToList();
+            List<int> userUseCases = new List<int>();
+            for (int i = 2; i <= 9; i++)
+            {
+                userUseCases.Add(i);
+            }
+            List<int> adminUseCases = new List<int>();
+            for (int i = 10; i <= 25; i++)
+            {
+                adminUseCases.Add(i);
+            }
 
             userUseCases.ForEach(x => context.UserUseCases.Add(new UserUseCase
             {
