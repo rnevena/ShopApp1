@@ -7,6 +7,7 @@ using ShopApp1.Application.Queries.Products;
 using ShopApp1.Application.Searches;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,22 +45,48 @@ namespace ShopApp1.Api.Controllers
         }
 
         // POST api/<ProductController>
-        //[HttpPost]
-        //public void Post([FromForm] CreateProductWithImageDto dto, [FromServices] ICreateProductCommand command)
-        //{
-        //}
         [HttpPost]
 
-        public IActionResult Post([FromBody] CreateProductDto dto, [FromServices] ICreateProductCommand command)
+        public IActionResult Post([FromForm] CreateProductWithImageDto dto, [FromServices] ICreateProductCommand command)
         {
+            if(dto.Image!=null)
+            {
+                foreach(var img in dto.Image)
+                {
+                    var guid = Guid.NewGuid();
+                    var extension = Path.GetExtension(img.FileName);
+                    var newName = guid + extension;
+                    var path = Path.Combine("wwwroot", "images", newName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        img.CopyTo(fileStream);
+                    }
+                    dto.ImageName.Add(newName);
+                }
+            }
             executor.ExecuteCommand(command, dto);
             return StatusCode(201);
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] CreateProductDto dto, [FromServices] IUpdateProductCommand command)
+        public IActionResult Put(int id, [FromForm] CreateProductWithImageDto dto, [FromServices] IUpdateProductCommand command)
         {
+            if (dto.Image != null)
+            {
+                foreach (var img in dto.Image)
+                {
+                    var guid = Guid.NewGuid();
+                    var extension = Path.GetExtension(img.FileName);
+                    var newName = guid + extension;
+                    var path = Path.Combine("wwwroot", "images", newName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        img.CopyTo(fileStream);
+                    }
+                    dto.ImageName.Add(newName);
+                }
+            }
             dto.Id = id;
             executor.ExecuteCommand(command, dto);
             return StatusCode(204);

@@ -17,28 +17,33 @@ using ShopApp1.Application.Commands.Materials;
 using ShopApp1.Application.Commands.Orders;
 using ShopApp1.Application.Commands.Products;
 using ShopApp1.Application.Commands.Users;
+using ShopApp1.Application.Commands.UserUseCases;
 using ShopApp1.Application.Email;
 using ShopApp1.Application.Queries.Categories;
 using ShopApp1.Application.Queries.Materials;
 using ShopApp1.Application.Queries.Orders;
 using ShopApp1.Application.Queries.Products;
+using ShopApp1.Application.Queries.UseCaseLogs;
 using ShopApp1.DataAccess;
 using ShopApp1.Implementation.Commands.Categories;
 using ShopApp1.Implementation.Commands.Materials;
 using ShopApp1.Implementation.Commands.Orders;
 using ShopApp1.Implementation.Commands.Products;
 using ShopApp1.Implementation.Commands.Users;
+using ShopApp1.Implementation.Commands.UserUseCases;
 using ShopApp1.Implementation.Email;
 using ShopApp1.Implementation.Logging;
 using ShopApp1.Implementation.Queries.Categories;
 using ShopApp1.Implementation.Queries.Materials;
 using ShopApp1.Implementation.Queries.Orders;
 using ShopApp1.Implementation.Queries.Products;
+using ShopApp1.Implementation.Queries.UseCaseLogs;
 using ShopApp1.Implementation.Validators.Categories;
 using ShopApp1.Implementation.Validators.Materials;
 using ShopApp1.Implementation.Validators.Orders;
 using ShopApp1.Implementation.Validators.Products;
 using ShopApp1.Implementation.Validators.Users;
+using ShopApp1.Implementation.Validators.UserUseCases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -96,9 +101,6 @@ namespace ShopApp1.Api
             services.AddTransient<IGetOneProductQuery, GetOneProductQuery>();
             services.AddTransient<CreateProductValidator>();
 
-            //services.AddTransient<IDbConnection>(db => new SqlConnection(
-            //        Configuration.GetConnectionString("Data Source=localhost;Initial Catalog=ShopApp4;Integrated Security=True")));
-
             //orders
             services.AddTransient<ICreateOrderCommand, CreateOrderCommand>();
             services.AddTransient<IGetOrdersQuery, GetOrdersQuery>();
@@ -112,6 +114,13 @@ namespace ShopApp1.Api
             services.AddTransient<IDeleteUserCommand, DeleteUserCommand>();
             services.AddTransient<IUpdateUserCommand, UpdateUserCommand>();
             services.AddTransient<RegisterValidator>();
+
+            //user use cases
+            services.AddTransient<IUpdateUserUseCaseCommand, UpdateUserUseCaseCommand>();
+            services.AddTransient<UpdateUserUseCaseValidator>();
+
+            //use case logs
+            services.AddTransient<IUseCaseLogsQuery, UseCaseLogsQuery>();
 
             // autorizacija
             services.AddHttpContextAccessor();

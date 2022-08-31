@@ -28,8 +28,7 @@ namespace ShopApp1.Implementation.Commands.Products
         public void Execute(int request)
         {
             var product = _context.Products.Find(request);
-            //var query = _context.ProductMaterials.Include(x => x.Product).Where(x => x.ProductId == request).FirstOrDefault();
-            
+            var query = _context.ProductMaterials.Include(x => x.Product).Where(x => x.ProductId == request);
 
             if (product==null)
             {
@@ -37,6 +36,8 @@ namespace ShopApp1.Implementation.Commands.Products
             }
             product.IsActive = false;
             product.DeletedAt = DateTime.Now;
+
+            _context.RemoveRange(query);
             //var product_materials = product.ProductMaterials;
             //if (product_materials != null)
             //{

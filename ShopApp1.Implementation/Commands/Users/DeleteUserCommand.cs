@@ -27,7 +27,8 @@ namespace ShopApp1.Implementation.Commands.Users
         {
             var user = _context.Users.Find(request);
             var query = _context.Orders.Where(x => x.UserId == request);
-            if(user==null)
+            var query2 = _context.UserUseCases.Where(x => x.UserId == request);
+            if (user==null)
             {
                 throw new EntityNotFoundException(request, typeof(User));
             }
@@ -51,6 +52,8 @@ namespace ShopApp1.Implementation.Commands.Users
                     i.DeletedAt = DateTime.Now;
                 }
             }
+            _context.RemoveRange(query2);
+
             _context.SaveChanges();
 
         }

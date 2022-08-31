@@ -14,10 +14,10 @@ namespace ShopApp1.Application.Searches
         public int? Page { get; set; } = 1;
     }
 
-    //public class BasePagedSearch : PagedSearch
-    //{
-    //    public string Keyword { get; set; }
-    //}
+    public class BasePagedSearch : PagedSearch
+    {
+        public string Keyword { get; set; }
+    }
     public class CategoriesPagedSearch : PagedSearch
     {
         public string Name { get; set; }
@@ -38,6 +38,10 @@ namespace ShopApp1.Application.Searches
         public string Id { get; set; }
         public string UserId { get; set; }
         //public string Name { get; set; }
+    }
+    public class UseCaseLogsPagedSearch : BasePagedSearch
+    {
+        public string UserId { get; set; }
     }
 
 }

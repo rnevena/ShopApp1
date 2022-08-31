@@ -43,7 +43,7 @@ namespace ShopApp1.Implementation.Commands.Users
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            var useCases = Enumerable.Range(1, 8).ToList();
+            var useCases = Enumerable.Range(2, 9).ToList();
             useCases.ForEach(x => _context.UserUseCases.Add(new UserUseCase
             {
                 UserId = user.Id,

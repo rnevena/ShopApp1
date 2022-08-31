@@ -24,7 +24,7 @@ namespace ShopApp1.DataAccess
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=ShopApp4;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=ShopApp5;Integrated Security=True");
             base.OnConfiguring(optionsBuilder);
         }
 

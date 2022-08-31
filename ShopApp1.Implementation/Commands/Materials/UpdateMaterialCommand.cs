@@ -24,7 +24,7 @@ namespace ShopApp1.Implementation.Commands.Materials
             _validator = validator;
         }
 
-        public int Id => 17;
+        public int Id => 16;
 
         public string Name => "update material (using entity framework)";
 

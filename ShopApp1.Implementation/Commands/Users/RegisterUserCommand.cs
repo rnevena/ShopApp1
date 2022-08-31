@@ -3,9 +3,11 @@ using ShopApp1.Application.Commands.Users;
 using ShopApp1.Application.DTO;
 using ShopApp1.Application.Email;
 using ShopApp1.DataAccess;
+using ShopApp1.Domain;
 using ShopApp1.Implementation.Validators.Users;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ShopApp1.Implementation.Commands.Users
@@ -30,17 +32,28 @@ namespace ShopApp1.Implementation.Commands.Users
         public void Execute(UserDto request)
         {
             _validator.ValidateAndThrow(request);
-            _context.Users.Add(new Domain.User
+            var user = new User
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
+                Email = request.Email,
                 Username = request.Username,
                 Password = request.Password,
-                Email = request.Email,
                 Address = request.Address
-            });
+            };
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            var useCases = Enumerable.Range(2, 9).ToList();
+            useCases.ForEach(x => _context.UserUseCases.Add(new UserUseCase
+            {
+                UserId = user.Id,
+                UserUseCaseId = x
+            }));
 
             _context.SaveChanges();
+
             _sender.Send(new SendEmailDto
             {
                 Subject = "<h1>Welcome to our shop. Please confirm your email.</h1>",
