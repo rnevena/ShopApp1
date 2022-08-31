@@ -24,7 +24,7 @@ namespace ShopApp1.Implementation.Commands.Products
             _validator = validator;
         }
 
-        public int Id => 18;
+        public int Id => 20;
 
         public string Name => "update product (using entity framework)";
 

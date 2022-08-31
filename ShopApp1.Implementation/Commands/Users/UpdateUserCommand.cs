@@ -24,7 +24,7 @@ namespace ShopApp1.Implementation.Commands.Users
             _validator = validator;
         }
 
-        public int Id => 21;
+        public int Id => 23;
 
         public string Name => "update user (using entity framework)";
 

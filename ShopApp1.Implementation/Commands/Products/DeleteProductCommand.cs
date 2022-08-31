@@ -21,7 +21,7 @@ namespace ShopApp1.Implementation.Commands.Products
             _context = context;
         }
 
-        public int Id => 17;
+        public int Id => 19;
 
         public string Name => "delete product (using entity framework)";
 

@@ -33,12 +33,17 @@ namespace ShopApp1.Api.Controllers
         {
             return Ok(executor.ExecuteQuery(query, search));
         }
+        [HttpGet("user")]
+        public IActionResult Get([FromQuery] OrdersPagedSearch search, [FromServices] IGetPersonalOrdersQuery query)
+        {
+            return Ok(executor.ExecuteQuery(query, search));
+        }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneOrderQuery query)
         {
-            return "value";
+            return Ok(executor.ExecuteQuery(query, id));
         }
 
         // POST api/<OrderController>

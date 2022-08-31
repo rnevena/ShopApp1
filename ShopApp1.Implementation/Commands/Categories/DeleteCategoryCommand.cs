@@ -24,7 +24,7 @@ namespace ShopApp1.Implementation.Commands.Categories
             _validator = validator;
         }
 
-        public int Id => 20;
+        public int Id => 13;
 
         public string Name => "delete category (using entity framework)";
 

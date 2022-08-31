@@ -10,7 +10,7 @@ namespace ShopApp1.Application.DTO
     {
         public int UserId { get; set; }
         public DateTime OrderDate { get; set; }
-        public int OrderStatusId { get; set; }
+        public string OrderStatusName { get; set; }
 
     }
 }

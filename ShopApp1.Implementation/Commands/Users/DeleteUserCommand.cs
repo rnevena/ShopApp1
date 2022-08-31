@@ -19,7 +19,7 @@ namespace ShopApp1.Implementation.Commands.Users
         {
             _context = context;
         }
-        public int Id => 20;
+        public int Id => 22;
 
         public string Name => "delete user (using entity framework)";
 

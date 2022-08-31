@@ -20,7 +20,7 @@ namespace ShopApp1.Implementation.Commands.Categories
             _validator = validator;
         }
 
-        public int Id => 16;
+        public int Id => 12;
 
         public string Name => "create new category (using entity framework)";
 

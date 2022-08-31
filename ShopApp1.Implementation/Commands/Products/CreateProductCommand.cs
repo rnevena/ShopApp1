@@ -23,7 +23,7 @@ namespace ShopApp1.Implementation.Commands.Products
             _validator = validator;
         }
 
-        public int Id => 16;
+        public int Id => 18;
 
         public string Name => "create new product (using entity framework)";
 

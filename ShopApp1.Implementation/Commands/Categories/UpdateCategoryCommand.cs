@@ -21,7 +21,7 @@ namespace ShopApp1.Implementation.Commands.Categories
             _context = context;
             _validator = validator;
         }
-        public int Id => 30;
+        public int Id => 14;
 
         public string Name => "update category (using entity framework)";
 

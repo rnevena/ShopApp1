@@ -25,7 +25,7 @@ namespace ShopApp1.Implementation.Commands.Materials
             _validator = validator;
         }
 
-        public int Id => 14;
+        public int Id => 16;
 
         public string Name => "delete material (using entity framework)";
 

@@ -20,7 +20,7 @@ namespace ShopApp1.Implementation.Queries.Orders
         {
             _context = context;
         }
-        public int Id => 9;
+        public int Id => 10;
 
         public string Name => "search orders";
 
@@ -28,14 +28,16 @@ namespace ShopApp1.Implementation.Queries.Orders
         {
             var query = _context.Orders.AsQueryable();
 
-            if (!string.IsNullOrEmpty(search.Id.ToString()) || !string.IsNullOrWhiteSpace(search.Id.ToString()))
+            if (!string.IsNullOrEmpty(search.Id) || !string.IsNullOrWhiteSpace(search.Id))
             {
-                query = query.Where(x => x.Id.Equals(search.Id));
+                query = query.Where(x => x.Id.ToString().Equals(search.Id));
             }
-            if (!string.IsNullOrEmpty(search.UserId.ToString()) || !string.IsNullOrWhiteSpace(search.UserId.ToString()))
+            if (!string.IsNullOrEmpty(search.UserId) || !string.IsNullOrWhiteSpace(search.UserId))
             {
-                query = query.Where(x => x.UserId.Equals(search.UserId));
+                query = query.Where(x => x.UserId.ToString().Equals(search.UserId));
             }
+            
+
             var skipItems = (search.Page.Value - 1) * search.PerPage.Value;
             var response = new PagedResponse<OrderSearchDto>();
             response.TotalCount = query.Count();
@@ -44,7 +46,7 @@ namespace ShopApp1.Implementation.Queries.Orders
                 Id = x.Id,
                 UserId = x.UserId,
                 OrderDate = x.OrderDate,
-                OrderStatusId = x.OrderStatusId
+                OrderStatusName = _context.OrderStatuses.Where(y=>y.Id==x.OrderStatusId).Select(y=>y.Name).FirstOrDefault().ToString()
             
             }).ToList();
 

@@ -102,6 +102,8 @@ namespace ShopApp1.Api
             //orders
             services.AddTransient<ICreateOrderCommand, CreateOrderCommand>();
             services.AddTransient<IGetOrdersQuery, GetOrdersQuery>();
+            services.AddTransient<IGetPersonalOrdersQuery, GetPersonalOrdersQuery>();
+            services.AddTransient<IGetOneOrderQuery, GetOneOrderQuery>();
             services.AddTransient<CreateOrderValidator>();
 
             //user
