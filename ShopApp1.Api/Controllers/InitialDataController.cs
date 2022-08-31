@@ -162,6 +162,26 @@ namespace ShopApp1.Api.Controllers
                 }
 
             };
+            var order_statuses = new List<OrderStatus>
+            {
+                new OrderStatus
+                {
+                    Name = "Processing"
+                },
+                new OrderStatus
+                {
+                    Name = "Delivered"
+                },
+                new OrderStatus
+                {
+                    Name = "Received"
+                },
+                new OrderStatus
+                {
+                    Name = "Terminated"
+                },
+
+            };
             List<int> userUseCases = new List<int>();
             for (int i = 2; i <= 9; i++)
             {
@@ -189,6 +209,7 @@ namespace ShopApp1.Api.Controllers
             context.Products.AddRange(products);
             context.ProductMaterials.AddRange(prod_mat);
             context.Users.AddRange(users);
+            context.OrderStatuses.AddRange(order_statuses);
             context.SaveChanges();
             return StatusCode(201);
         }
